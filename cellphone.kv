@@ -6,9 +6,12 @@
         orientation: 'vertical'
         padding: 10
         Label:
+            text: root.display_text
+            text_size: self.width-20, self.height-20
+            valign: 'middle'
+            halign: 'center'
             size_hint_y: .2
-            text: root.display_text + root.units if root.units != None else root.display_text
-            color: (0., 0., 0., 1.)
+           
             text_size: self.size
             #theme: ('blue', 'variant_2')
             halign: 'right'

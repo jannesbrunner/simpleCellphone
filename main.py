@@ -20,11 +20,9 @@ class Cellphone(Widget):
 
     def __init__(self, **kwargs):
         super(Cellphone, self).__init__(**kwargs)
+       
 
-    def check_minimum_value(self):
-        if self.minimum_value != None:
-            if self.display_value < self.minimum_value:
-                self.display_text = str(self.minimum_value)
+
 
     def button_callback(self, button_str):
         if button_str in [str(x) for x in range(10)]:
@@ -32,26 +30,18 @@ class Cellphone(Widget):
                 self.display_text = button_str 
             else:
                 self.display_text = self.display_text + button_str
-            maximum_value = self.maximum_value
-            if maximum_value != None:
-                if self.display_value > maximum_value: 
-                    self.display_value = maximum_value
+            # maximum_value = self.maximum_value
+            # if maximum_value != None:
+            #    if self.display_value > maximum_value: 
+            #        self.display_value = maximum_value
         elif button_str == 'del':
             self.display_text = self.display_text[:-1]
-        elif button_str == 'ret':
-            self.check_minimum_value()
-            self.return_callback(self.display_value, True)
+        elif button_str == 'dial':
+            pass
+        elif button_str == 'end':
+            pass
 
-    def on_display_text(self, instance, value):
-        if value == '':
-            self.display_text = '0'
-            return
-        if int(value) > self.maximum_value and self.maximum_value != None:
-            self.display_text = str(self.maximum_value)
-            return
-        self.display_value = int(value)
-        if self.return_callback is not None:
-            self.return_callback(self.display_value, False)
+    
 
 if __name__ == '__main__':
     CellphoneApp().run()
