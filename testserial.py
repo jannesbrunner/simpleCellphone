@@ -3,7 +3,7 @@
 import serial
 import time
 
-ser = serial.Serial("COM6",9600) #ttyS0 is the port on the Pi3, it may be ttyAMA0 on the older Pi's. 
+ser = serial.Serial("ttys0",9600) #ttyS0 is the port on the Pi3, it may be ttyAMA0 on the older Pi's. 
 # Set it to COMX (e.g. COM6) on a Windows machine
 ser.flushInput()      #clear the input buffer
 ser.flushOutput()     #clear the output buffer
