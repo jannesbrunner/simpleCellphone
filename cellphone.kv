@@ -1,109 +1,139 @@
 #:kivy 1.0
 <Cellphone>:
+    
     BoxLayout:
         size: root.size
         pos: root.pos
         orientation: 'vertical'
         padding: 10
-        Label:
-            text: root.display_text
-            text_size: self.width-20, self.height-20
-            valign: 'middle'
-            halign: 'center'
-            size_hint_y: .2
+    
+        TabbedPanel:
            
-            text_size: self.size
-            #theme: ('blue', 'variant_2')
-            halign: 'right'
-            font_size: self.height * .75
-        GridLayout:
-            cols:3
-            size_hint_y: .8
-            padding: 5
-            spacing: 5
-            Button:
-                text: "7"
-                size_hint: (.33,.25)
-                on_release: root.button_callback("7")
-                font_size: self.height * .4
-                #theme: ('blue', 'numpad')
-            Button:
-                text: "8"
-                size_hint: (.33,.25)
-                on_release: root.button_callback("8")
-                font_size: self.height * .4
-                #theme: ('blue', 'numpad')
-            Button:
-                text: "9"
-                size_hint: (.33,.25)
-                on_release: root.button_callback("9")
-                font_size: self.height * .4
-                #theme: ('blue', 'numpad')
-            Button:
-                text: "4"
-                size_hint: (.33,.25)
-                on_release: root.button_callback("4")
-                font_size: self.height * .4
-                #theme: ('blue', 'numpad')
-            Button:
-                text: "5"
-                size_hint: (.33,.25)
-                on_release: root.button_callback("5")
-                font_size: self.height * .4
-                #theme: ('blue', 'numpad')
-            Button:
-                text: "6"
-                size_hint: (.33,.25)
-                on_release: root.button_callback("6")
-                font_size: self.height * .4
-                #theme: ('blue', 'numpad')
-            Button:
-                text: "1"
-                size_hint: (.33,.25)
-                on_release: root.button_callback("1")
-                font_size: self.height * .4
-                #theme: ('blue', 'numpad')
-            Button:
-                text: "2"
-                size_hint: (.33,.25)
-                on_release: root.button_callback("2")
-                font_size: self.height * .4
-                #theme: ('blue', 'numpad')
-            Button:
-                text: "3"
-                size_hint: (.33,.25)
-                on_release: root.button_callback("3")
-                font_size: self.height * .4
-                #theme: ('blue', 'numpad')
-            Button:
-                text: "del"
-                size_hint: (.33,.25)
-                on_release: root.button_callback("del")
-                font_size: self.height * .4
-                #theme: ('blue', 'numpad')
-            Button:
-                text: "0"
-                size_hint: (.33,.25)
-                on_release: root.button_callback("0")
-                font_size: self.height * .4
-                #theme: ('blue', 'numpad')
-        GridLayout:
-            cols:2
-            size_hint_y: .2
-            padding: 5
-            spacing: 5
-            Button:
-                text: "Dial"
-                size_hint: (.33,.25)
-                on_release: root.button_callback("dial")
-                font_size: self.height * .4
-                #theme: ('blue', 'numpad')
-            Button:
-                text: "End"
-                size_hint: (.33,.25)
-                on_release: root.button_callback("end")
-                font_size: self.height * .4
-                #theme: ('blue', 'numpad')
+            do_default_tab: False
+
+
+            TabbedPanelItem:
+                text: "Phone"
+                BoxLayout:
+                    orientation: 'vertical'
+                    Label:
+                        text: root.display_text
+                        text_size: self.width-20, self.height-20
+                        valign: 'middle'
+                        halign: 'center'
+                        size_hint_y: .2
+                        text_size: self.size
+                        #theme: ('blue', 'variant_2')
+                        halign: 'right'
+                        font_size: self.height * .75
+                    GridLayout:
+                        cols:3
+                        size_hint_y: .8
+                        padding: 5
+                        spacing: 5
+                        Button:
+                            text: "7"
+                            size_hint: (.33,.25)
+                            on_release: root.button_callback("7")
+                            font_size: self.height * .4
+                            #theme: ('blue', 'numpad')
+                        Button:
+                            text: "8"
+                            size_hint: (.33,.25)
+                            on_release: root.button_callback("8")
+                            font_size: self.height * .4
+                            #theme: ('blue', 'numpad')
+                        Button:
+                            text: "9"
+                            size_hint: (.33,.25)
+                            on_release: root.button_callback("9")
+                            font_size: self.height * .4
+                            #theme: ('blue', 'numpad')
+                        Button:
+                            text: "4"
+                            size_hint: (.33,.25)
+                            on_release: root.button_callback("4")
+                            font_size: self.height * .4
+                            #theme: ('blue', 'numpad')
+                        Button:
+                            text: "5"
+                            size_hint: (.33,.25)
+                            on_release: root.button_callback("5")
+                            font_size: self.height * .4
+                            #theme: ('blue', 'numpad')
+                        Button:
+                            text: "6"
+                            size_hint: (.33,.25)
+                            on_release: root.button_callback("6")
+                            font_size: self.height * .4
+                            #theme: ('blue', 'numpad')
+                        Button:
+                            text: "1"
+                            size_hint: (.33,.25)
+                            on_release: root.button_callback("1")
+                            font_size: self.height * .4
+                            #theme: ('blue', 'numpad')
+                        Button:
+                            text: "2"
+                            size_hint: (.33,.25)
+                            on_release: root.button_callback("2")
+                            font_size: self.height * .4
+                            #theme: ('blue', 'numpad')
+                        Button:
+                            text: "3"
+                            size_hint: (.33,.25)
+                            on_release: root.button_callback("3")
+                            font_size: self.height * .4
+                            #theme: ('blue', 'numpad')
+                        Button:
+                            text: "*"
+                            size_hint: (.33,.25)
+                            on_release: root.button_callback("*")
+                            font_size: self.height * .4
+                            #theme: ('blue', 'numpad')
+                        Button:
+                            text: "0"
+                            size_hint: (.33,.25)
+                            on_release: root.button_callback("0")
+                            font_size: self.height * .4
+                            #theme: ('blue', 'numpad')
+                        Button:
+                            text: "#"
+                            size_hint: (.33,.25)
+                            on_release: root.button_callback("#")
+                            font_size: self.height * .4
+                            #theme: ('blue', 'numpad')
+                    GridLayout:
+                        cols: 2
+                        size_hint_y: .2
+                        padding: 5
+                        spacing: 5
+                        Button:
+                            text: "Dial"
+                            size_hint: (.33,.25)
+                            on_release: root.button_callback("dial")
+                            font_size: self.height * .4
+                            #theme: ('blue', 'numpad')
+                        Button:
+                            text: "Del"
+                            size_hint: (.33,.25)
+                            on_release: root.button_callback("del")
+                            font_size: self.height * .4
+                            #theme: ('blue', 'numpad')
+        
+                
+                
+            TabbedPanelItem:
+                text: "Settings"
+                Label:
+                    text: "Content of Second Panel"
+                
+            TabbedPanelItem:
+                text: "Info"
+                Label:
+                    text: "Content of Third Panel"
+
+    
 
 
 
