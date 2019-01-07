@@ -1,6 +1,18 @@
 #:kivy 1.0
+<DialPopup>:
+    size_hint: .7, .7
+    auto_dismiss: False
+    title: "Dialing " + root.display_text
+    BoxLayout:
+        orientation: "vertical"
+        Label:
+            text: "00:00"
+        Button:
+            text: "End"
+            on_press: root.dismiss()
+
 <Cellphone>:
-    
+ 
     BoxLayout:
         size: root.size
         pos: root.pos
