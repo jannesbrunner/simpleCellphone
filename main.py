@@ -24,7 +24,7 @@ class DialPopup(Popup):
 
 class Cellphone(Widget):
     
-    display_text = StringProperty("0")
+    display_text = StringProperty("Enter Tel Number")
     display_value = NumericProperty(0)
     init_value = NumericProperty(100)
     maximum_value = NumericProperty(None, allownone=True)
@@ -48,8 +48,10 @@ class Cellphone(Widget):
 
 
     def button_callback(self, button_str):
-        if button_str in [str(x) for x in range(10)]:
-            if self.display_text == '0':
+        valid_chars = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, "#", "*"]
+
+        if button_str in [str(x) for x in valid_chars]:
+            if self.display_text == 'Enter Tel Number':
                 self.display_text = button_str 
             else:
                 self.display_text = self.display_text + button_str
@@ -58,8 +60,12 @@ class Cellphone(Widget):
             # if maximum_value != None:
             #    if self.display_value > maximum_value: 
             #        self.display_value = maximum_value
+            
         elif button_str == 'del':
-            self.display_text = self.display_text[:-1]
+            if len(self.display_text) == 1:
+                self.display_text = "Enter Tel Number"
+            elif self.display_text != "Enter Tel Number":
+                self.display_text = self.display_text[:-1]
         elif button_str == 'dial':
             
             dial_popup = DialPopup(self.display_text)
