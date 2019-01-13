@@ -1,12 +1,27 @@
 #:kivy 1.0
-<DialPopup>:
+<IncomingPopup>:
     size_hint: .7, .7
     auto_dismiss: False
-    title: "Dialing " + root.display_text
+    title: "Incoming Call!"
     BoxLayout:
         orientation: "vertical"
         Label:
-            text: "00:00"
+            text: "Someone is calling you!"
+        Button:
+            text: "Accept"
+            on_press: root.reaction("accept")
+        Button:
+            text: "Refuse"
+            on_press: root.reaction("refuse")
+
+<DialPopup>:
+    size_hint: .7, .7
+    auto_dismiss: False
+    title: "Call with " + root.display_text
+    BoxLayout:
+        orientation: "vertical"
+        Label:
+            text: root.call_duration
         Button:
             text: "End"
             on_press: root.dismiss()
@@ -128,7 +143,7 @@
                             font_size: self.height * .4
                             #theme: ('blue', 'numpad')
                     GridLayout:
-                        cols: 2
+                        cols: 3
                         size_hint_y: .2
                         padding: 5
                         spacing: 5
@@ -136,6 +151,12 @@
                             text: "Dial"
                             size_hint: (.33,.25)
                             on_release: root.button_callback("dial")
+                            font_size: self.height * .4
+                            #theme: ('blue', 'numpad')
+                        Button:
+                            text: "Answer"
+                            size_hint: (.33,.25)
+                            on_release: root.button_callback("answer")
                             font_size: self.height * .4
                             #theme: ('blue', 'numpad')
                         Button:
@@ -151,20 +172,24 @@
                 text: "Settings"
                 Label:
                     text: "Content of Second Panel"
+            
                 
             TabbedPanelItem:
-                text: "Info"
+                text: "Log"
                 on_release: root.button_callback("log")
-                Label:
-                    text: "Content of Third Panel"
-                BoxLayout:
-                    height: "40dp"
-                    size_hint_y: None
+
                 TextInput:
                     size_hint_x: 20
                     text: root.log_text
-                
-
+            
+            TabbedPanelItem:
+                text: "GPS"
+                BoxLayout:
+                    orientation: "vertical"
+                    Label:
+                        text: "Control GPS"
+                    Button:
+                        text: root.gps_power
     
 
 
