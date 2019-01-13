@@ -34,7 +34,7 @@ class ErrorPopup(Popup):
 class IncomingPopup(Popup):
     
     
-    def __init__(self, phone, **kwargs, ): 
+    def __init__(self, phone, **kwargs): 
         super(IncomingPopup, self).__init__()
         self.phone = phone
 
