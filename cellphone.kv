@@ -11,6 +11,18 @@
             text: "End"
             on_press: root.dismiss()
 
+<ErrorPopup>:
+    size_hint: .7, .7
+    auto_dismiss: False
+    title: "Error"
+    BoxLayout:
+        orientation: "vertical"
+        Label:
+            text: root.display_text
+        Button:
+            text: "OK"
+            on_press: root.dismiss()
+
 <Cellphone>:
  
     BoxLayout:
@@ -142,8 +154,16 @@
                 
             TabbedPanelItem:
                 text: "Info"
+                on_release: root.button_callback("log")
                 Label:
                     text: "Content of Third Panel"
+                BoxLayout:
+                    height: "40dp"
+                    size_hint_y: None
+                TextInput:
+                    size_hint_x: 20
+                    text: root.log_text
+                
 
     
 
