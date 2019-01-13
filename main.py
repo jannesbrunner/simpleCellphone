@@ -62,11 +62,21 @@ class Cellphone(Widget):
         if isinstance(gps, bool):
             gps_switch = "OFF" if self.phone.gps == True else "ON" 
             self.gps_power = "Turn GPS " + gps_switch
+            self.log_text += "Turn GPS " + gps_switch + "\n"
             if self.phone.gps == True:
                 time.sleep(1)
+                print("Display GPS Info...")
+                self.log_text += "Display GPS Info...\n"
                 self.show_gps()
+            else:
+                print("GPS Clean Up")
+                self.log_text += "GPS Clean UP...\n"
+                self.gps_baudrate = ""
+                self.gps_gnss = ""
+                self.gps_status = ""
         else:
             error = ErrorPopup("GPS Toggle Error. Please Check the GPS Module (is it on?)")
+            self.log_text += "GPS Toggle Error. Please Check the GPS Module (is it on?) \n"
             error.open()
     
     def show_gps(self):
@@ -93,8 +103,17 @@ class Cellphone(Widget):
                 time.sleep(0.01)
                 self.read_gps()
 
-    def read_gps(self):
-        self.gps_data += self.phone.readGPS() + "\n"
+    def update_gps(self):
+        gps2uart = self.phone.toggle_gps_uart()
+        if gps2uart == True:
+            time.sleep(0.5)
+            self.gps_data += self.phone.readGPS() + "\n"
+            time.sleep(0.5)
+            gps2uart = self.phone.toggle_gps_uart()
+        else:
+            error = ErrorPopup(gps2uart)
+            error.open()
+
 
     ## Telephone Function    
     
