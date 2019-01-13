@@ -25,7 +25,12 @@ class CellphoneApp(App):
             
 
 class Cellphone(Widget):
-
+    info = '''Simple Cellphone v1. (2019-01-14) \n Made with Python 3 and the Kivy Framework.
+             \n Hochschule fuer Technik und Wirtschaft (HTW Berlin) [university of applied sciences] \n
+                Program: Computer Science \n 
+                Module: B55.1 MA Ausgewählte Kapitel mobiler Anwendungen \n
+                Course Instructor: Prof. Dr. Huhn \n
+                Project Work, developed by Jannes Brunner (https://www.github.com/jannesbrunner)'''
     return_callback = ObjectProperty(None, allownone=True)
     units = StringProperty(None, allownone=True)
     
@@ -219,7 +224,6 @@ class Cellphone(Widget):
 
     def handle_tab_switch(self):
         last_tab = self.ids.tpanel.current_tab.text
-        print(last_tab)
         if "GPS" not in last_tab and self.phone.gps == True:
             self.toggle_gps()
         new_log = self.phone.get_log()

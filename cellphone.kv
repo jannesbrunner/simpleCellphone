@@ -171,11 +171,18 @@
                 
                 
             TabbedPanelItem:
-                id: settingspanel
+                id: infopanel
                 on_release: root.handle_tab_switch()
-                text: "Settings"
-                Label:
-                    text: "Content of Second Panel"
+                text: "Info"
+                
+                BoxLayout:
+                    orientation: "vertical"
+                    Label:
+                        text: root.info
+                    Image:
+                        source: "htw.png"
+
+                        
             
                 
             TabbedPanelItem:
