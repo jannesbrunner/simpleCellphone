@@ -4,7 +4,7 @@ import time
 class PhoneManager():
 
     def __init__(self, **kwargs):
-        self._port = "tty0"
+        self._port = "ttyUSB0"
         self._baud = 9600
         self.logger = []
         self.gps = False
