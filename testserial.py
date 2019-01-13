@@ -3,7 +3,7 @@
 import serial
 import time
 
-ser = serial.Serial("ttys0",9600) #ttyS0 is the port on the Pi3, it may be ttyAMA0 on the older Pi's. 
+ser = serial.Serial("COM6",9600) #ttyS0 is the port on the Pi3, it may be ttyAMA0 on the older Pi's. 
 # Set it to COMX (e.g. COM6) on a Windows machine
 ser.flushInput()      #clear the input buffer
 ser.flushOutput()     #clear the output buffer
@@ -12,7 +12,8 @@ command = b'AT\r\n'  # Need to perform carriage return an new line, encode as by
 ser.write(command)   #send the AT command, we expect "OK" as answer
 answer = ser.readline()  #read a line of data from the serial port
 # print("Answer: " + answer.decode('utf-8')) #print the response from the SIM868 chip, it will echo at first
-time.sleep(1) # wait 1 second, maybe more
+print("Answer: " + answer.decode('utf-8')) 
+time.sleep(0.0001) # wait 1 second, maybe more
 answer = ser.readline()  #read a line of data from the serial port
 print("Answer: " + answer.decode('utf-8'))            #print the response from the SIM868 chip
 
