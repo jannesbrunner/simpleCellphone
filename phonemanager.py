@@ -4,7 +4,7 @@ import time
 class PhoneManager():
 
     def __init__(self, **kwargs):
-        self.__port = "COM6"
+        self._port = "COM6"
         self._baud = 9600
         self.logger = []
         self.gps = False
@@ -68,7 +68,12 @@ class PhoneManager():
             return "Please activate GPS!"
         else:
             gps_uart = self._at_handle("AT+CGNSTST=1") if self.gps_uart == False else self._at_handle("AT+CGNSTST=0")
-            return gps_uart
+            if isinstance(gps_uart, bool):
+                self.gps_uart = not self.gps_uart
+                return True
+            else:
+                return gps_uart
+       
     
     def get_gps_status(self):
         return self._at_send("AT+CGPSSTATUS")      
@@ -82,10 +87,22 @@ class PhoneManager():
     def set_gps_baudrate(self, rate):
         return self._at_handle("AT+CGNSIPR=" + str(rate))
 
+    def readGPS(self):
+        ser = serial.Serial(self._port, self._baud)
+        ser.flushInput()      #clear the input buffer
+        ser.flushOutput()     #clear the output buffer
+        ser.timeout = 5       #set the timeout on the serial port to 5 seconds
+        answer = ser.readline() # will always be "AT" autoreply for some reasons
+        # print("Answer: " + answer.decode('utf-8')) #print the response from the SIM868 chip, it will echo at first
+        time.sleep(00000.1) # wait
+        answer = ser.readline()  #read a line of data from the serial port
+        print("GPS: " + answer.decode())
+        return answer.decode()
+
 
 
     def _at_send(self, command, timeout = 0.0001):
-        ser = serial.Serial(self.__port, self._baud)
+        ser = serial.Serial(self._port, self._baud)
         ser.flushInput()      #clear the input buffer
         ser.flushOutput()     #clear the output buffer
         ser.timeout = 5       #set the timeout on the serial port to 5 seconds

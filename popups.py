@@ -30,7 +30,7 @@ class ErrorPopup(Popup):
     def __init__(self, error, **kwargs): 
         super(ErrorPopup, self).__init__()
         self.display_text = error
-
+        
 class IncomingPopup(Popup):
     
     

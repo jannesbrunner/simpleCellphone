@@ -47,11 +47,13 @@
         padding: 10
     
         TabbedPanel:
-           
+            id: tpanel
             do_default_tab: False
 
 
             TabbedPanelItem:
+                id: phonepanel
+                on_press: root.handle_tab_switch()
                 text: "Phone"
                 BoxLayout:
                     orientation: 'vertical'
@@ -169,27 +171,58 @@
                 
                 
             TabbedPanelItem:
+                id: settingspanel
+                on_release: root.handle_tab_switch()
                 text: "Settings"
                 Label:
                     text: "Content of Second Panel"
             
                 
             TabbedPanelItem:
+                id: logpanel
                 text: "Log"
-                on_release: root.button_callback("log")
+                on_release: root.handle_tab_switch()
 
                 TextInput:
                     size_hint_x: 20
                     text: root.log_text
             
             TabbedPanelItem:
+                id: gpspanel
                 text: "GPS"
+                on_press: root.handle_tab_switch()
                 BoxLayout:
                     orientation: "vertical"
-                    Label:
-                        text: "Control GPS"
+                    GridLayout:
+                        cols: 2
+                        size_hint_y: .2
+                        padding: 5
+                        spacing: 5
+                        Label:
+                            text: "Baudrate"
+                        Label:
+                            text: "GPS Status"
+                        Label:
+                            text: root.gps_baudrate
+                        Label:
+                            text: root.gps_status
+                       
+                    GridLayout:
+                        cols: 2
+                        size_hint_y: .2
+                        padding: 2
+                        spacing: 2
+                        Label:
+                            text: "GNNS Info"
+                        Label:
+                            text: root.gps_gnss
+                        
+
+                    TextInput:
+                        text: root.gps_data
                     Button:
                         text: root.gps_power
+                        on_release: root.toggle_gps()
     
 
 

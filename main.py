@@ -3,10 +3,12 @@ from kivy.uix.widget import Widget
 from kivy.uix.label import Label
 from kivy.uix.button import Button
 from kivy.uix.popup import Popup
+from kivy.uix.tabbedpanel import (TabbedPanel, TabbedPanelItem)
 from kivy.clock import Clock
 from kivy.properties import (StringProperty, 
     NumericProperty, ObjectProperty)
 
+import time
 import serial
 
 from phonemanager import PhoneManager
@@ -39,6 +41,11 @@ class Cellphone(Widget):
     
     # GPS Screen
     gps_power = StringProperty("Turn GPS ON")
+    gps_baudrate = StringProperty("")
+    gps_status = StringProperty("")
+    gps_gnss = StringProperty("")
+    gps_data = StringProperty("")
+
     
     # Misc
     phone = PhoneManager()
@@ -49,7 +56,45 @@ class Cellphone(Widget):
         # self.phone.enable_clip()
         # Clock.schedule_interval(self.check_ring, 4) # Buggy!
 
+    ## GPS Function
+    def toggle_gps(self):
+        gps = self.phone.toggle_gps()
+        if isinstance(gps, bool):
+            gps_switch = "OFF" if self.phone.gps == True else "ON" 
+            self.gps_power = "Turn GPS " + gps_switch
+            if self.phone.gps == True:
+                time.sleep(1)
+                self.show_gps()
+        else:
+            error = ErrorPopup("GPS Toggle Error. Please Check the GPS Module (is it on?)")
+            error.open()
+    
+    def show_gps(self):
+       gps_baud = self.phone.get_gps_baudrate()
+       gps_baud = gps_baud[9:]
+       self.gps_baudrate = gps_baud
 
+       time.sleep(0.5)
+       self.gps_status = self.phone.get_gps_status()
+       time.sleep(0.5)
+       gps_gnss = self.phone.get_gps_gnss_info()
+       gps_gnss = gps_gnss[9:]
+
+       self.gps_gnss = gps_gnss
+    
+    def toggle_gps_read(self):
+        gps2uart = self.phone.toggle_gps_uart()
+        if gps2uart == True:
+           Clock.schedule_once(Clock.schedule_interval(self.toggle_gps_read, 1), 2)
+        else:
+            error = ErrorPopup(gps2uart)
+            error.open()
+            if self.phone.gps == True:
+                time.sleep(0.01)
+                self.read_gps()
+
+    def read_gps(self):
+        self.gps_data += self.phone.readGPS() + "\n"
 
     ## Telephone Function    
     
@@ -106,8 +151,10 @@ class Cellphone(Widget):
             #        self.display_value = maximum_value
             
         elif button_str == 'del':
-            test = IncomingPopup(self.phone)
-            test.open()
+            # test = IncomingPopup(self.phone)
+            # test.open()
+            
+
             
             if len(self.display_text) == 1:
                 self.display_text = "Enter Tel Number"
@@ -150,14 +197,19 @@ class Cellphone(Widget):
             else:
                 error = ErrorPopup("No Incoming Call")
                 error.open()
-            
 
-        elif button_str == "log":
-            new_log = self.phone.get_log()
-            log_text = ""
-            for x in new_log:
-                log_text += x + "\n"
-            self.log_text += log_text
+    def handle_tab_switch(self):
+        last_tab = self.ids.tpanel.current_tab.text
+        print(last_tab)
+        if "GPS" not in last_tab and self.phone.gps == True:
+            self.toggle_gps()
+        new_log = self.phone.get_log()
+        log_text = ""
+        for x in new_log:
+            log_text += x + "\n"
+        self.log_text += log_text
+
+
             
 
 if __name__ == '__main__':
