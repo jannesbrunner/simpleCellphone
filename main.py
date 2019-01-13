@@ -223,9 +223,9 @@ class Cellphone(Widget):
                 error.open()
 
     def handle_tab_switch(self):
-        last_tab = self.ids.tpanel.current_tab.text
-        if "GPS" not in last_tab and self.phone.gps == True:
-            self.toggle_gps()
+        # last_tab = self.ids.tpanel.current_tab.text
+        # if "GPS" not in last_tab and self.phone.gps == True:
+        #     self.toggle_gps()
         new_log = self.phone.get_log()
         log_text = ""
         for x in new_log:
