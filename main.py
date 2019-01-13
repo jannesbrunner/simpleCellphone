@@ -28,7 +28,7 @@ class Cellphone(Widget):
     info = '''Simple Cellphone v1. (2019-01-14) \n Made with Python 3 and the Kivy Framework.
              \n Hochschule fuer Technik und Wirtschaft (HTW Berlin) [university of applied sciences] \n
                 Program: Computer Science \n 
-                Module: B55.1 MA Ausgewählte Kapitel mobiler Anwendungen \n
+                Module: B55.1 MA Ausgewaehlte Kapitel mobiler Anwendungen \n
                 Course Instructor: Prof. Dr. Huhn \n
                 Project Work, developed by Jannes Brunner (https://www.github.com/jannesbrunner)'''
     return_callback = ObjectProperty(None, allownone=True)
