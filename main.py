@@ -9,7 +9,7 @@ from kivy.properties import (StringProperty,
     NumericProperty, ObjectProperty)
 
 import time
-import serial
+from serial import (Serial, SerialException)
 
 from phonemanager import PhoneManager
 from popups import (DialPopup, ErrorPopup, IncomingPopup)
@@ -202,7 +202,7 @@ class Cellphone(Widget):
                     else:
                         error = ErrorPopup(check)
                         error.open()
-            except serial.SerialException:
+            except SerialException:
                 error = ErrorPopup("No connection to the SIM Module could be established")
                 self.log_text += "No connection to the SIM Module could be established!\n"
                 error.open()
